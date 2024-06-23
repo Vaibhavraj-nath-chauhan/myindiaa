@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  ecom:
+    image: vaibhavrajnathchauhan/ecom:1
+    container_name: ecom
+    ports:
+      - "3000:3000"
+    environment:
+      - JWT_SECRET=6bada4d7a6ceb9d61508cbd3b5e9f410d75cf1061d96d0840957bb5366589d54
+      - PORT=3000
+      - MONGODB_URL=mongodb://root:123456@mongo:27017
+      - FLUTTERWAVE_V3_SECRET_KEY=FLWSECK_TEST-46070ecbb4537f8320480a5da2d559e6-X
+      - FLUTTERWAVE_v3_PUBLIC_KEY=FLWPUBK_TEST-7e53deecd50691a66a39ff92afb112db-X
+
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
