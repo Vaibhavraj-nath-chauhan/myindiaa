@@ -1,0 +1,22 @@
+# bastion
+host yc-mena-bastion
+     hostname <bastion-public-ip>
+     IdentityFile <location-bastion-pem>
+     user ubuntu
+     port 22
+
+# server port 1
+host server-port-1
+     hostname <server-1-private-key>
+     IdentityFile <location-server-pem>
+     user ubuntu
+     port 22
+     ProxyJump yc-mena-bastion
+
+# server port 2
+host server-port-2
+     hostname <server-2-private-key>
+     IdentityFile <location-server-pem>
+     user ubuntu
+     port 22
+     ProxyJump yc-mena-bastion
